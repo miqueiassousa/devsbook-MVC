@@ -6,6 +6,7 @@ use src\handlers\LoginHandler;
 
 class HomeController extends Controller {
 
+    // Armazena usuario que esta logado
     private $loggedUser;
 
     public function __construct()
@@ -15,8 +16,9 @@ class HomeController extends Controller {
             $this->redirect('/login');
         }
     }
+
     public function index() {
         
         $this->render('home', ['nome' => 'Bonieky']);
     }
-}
+} 

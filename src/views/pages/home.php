@@ -9,6 +9,7 @@
 
                 <?= $render('feed-editor', ['user'=>$loggedUser]); ?>
 
+                
                 <?= $render('feed-item'); ?>
                 
             </div>

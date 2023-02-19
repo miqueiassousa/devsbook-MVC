@@ -44,3 +44,94 @@ document.querySelector('.feed-new-input').addEventListener('blur', function(obj)
         document.querySelector('.feed-new-input-placeholder').style.display = 'block';
     }
 });
+
+
+
+function closeFeedWindow() {
+    document.querySelectorAll('.feed-item-more-window').forEach(item=>{
+        item.style.display = 'none';
+    });
+
+    document.removeEventListener('click', closeFeedWindow);
+}
+
+document.querySelectorAll('.feed-item-head-btn').forEach(item=>{
+    item.addEventListener('click', ()=>{
+        closeFeedWindow();
+        item.querySelector('.feed-item-more-window').style.display = 'block';
+
+        setTimeout(()=>{
+            document.addEventListener('click', closeFeedWindow);
+        }, 500);
+    });
+});
+
+
+// SCRIPT para acionar o botão do like e fazer a contagem
+
+if(document.querySelector('.like-btn')) {
+
+    // Pegar todos os botões
+    document.querySelectorAll('.like-btn').forEach(item=>{
+
+        // Adicionar evento de click em todos esses botões
+        item.addEventListener('click', ()=>{
+
+            // Pegar o ID da postagem (Inserir atributo em feedItem )
+            let id = item.closest('.feed-item').getAttribute('data-id');
+
+            // PEgar a quantidade de likes
+            let count = parseInt(item.innerText);
+
+            // Se não deu o like ou não teme essa class adicionar mias um e colocar o like
+            if(item.classList.contains('on') === false) {
+                item.classList.add('on');
+                item.innerText = ++count;
+            } else {
+                item.classList.remove('on');
+                item.innerText = --count;
+            }
+
+	        fetch(BASE+'/ajax/like/'+id);
+        });
+    });
+}
+
+if(document.querySelector('.fic-item-field')) {
+    document.querySelectorAll('.fic-item-field').forEach(item=>{
+        item.addEventListener('keyup', async (e)=>{
+            if(e.keyCode == 13) {
+                let id = item.closest('.feed-item').getAttribute('data-id');
+                let txt = item.value;
+                item.value = '';
+
+                let data = new FormData();
+                data.append('id', id);
+                data.append('txt', txt);
+
+                let req = await fetch(BASE+'/ajax/comment', {
+                    method: 'POST',
+                    body: data
+                });
+                let json = await req.json();
+
+                if(json.error == '') {
+                    let html = '<div class="fic-item row m-height-10 m-width-20">';
+                    html += '<div class="fic-item-photo">';
+                    html += '<a href="'+BASE+json.link+'"><img src="'+BASE+json.avatar+'" /></a>';
+                    html += '</div>';
+                    html += '<div class="fic-item-info">';
+                    html += '<a href="'+BASE+json.link+'">'+json.name+'</a>';
+                    html += json.body;
+                    html += '</div>';
+                    html += '</div>';
+
+                    item.closest('.feed-item')
+                        .querySelector('.feed-item-comments-area')
+                        .innerHTML += html;
+                }
+
+            }
+        });
+    });
+}

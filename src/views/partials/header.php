@@ -10,7 +10,7 @@
     <header>
         <div class="container">
             <div class="logo">
-                <a href="<?=$base;?>"><img src="assets/images/devsbook_logo.png" /></a>
+                <a href=""><img src="<?=$base;?>/assets/images/devsbook_logo.png" /></a>
             </div>
             <div class="head-side">
                 <div class="head-side-left">
@@ -27,7 +27,7 @@
                             <img src="<?=$base;?>/media/avatars/<?=$loggedUser->avatar;?>"/>
                         </div>
                     </a>
-                    <a href="" class="user-logout">
+                    <a href="<?=$base;?>/sair" class="user-logout">
                         <img src="<?=$base;?>/assets/images/power_white.png" />
                     </a>
                 </div>

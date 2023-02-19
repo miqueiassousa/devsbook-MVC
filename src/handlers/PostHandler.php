@@ -12,7 +12,7 @@ use \src\models\UserRelation;
 class PostHandler
 {
 
-    public function addPost($idUser, $type, $body)
+    public static function addPost($idUser, $type, $body)
     {
 
         $body = trim($body);

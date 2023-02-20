@@ -249,7 +249,7 @@ class PostHandler
             ->where('id_user', $loggedUserId)
         ->get();
 
-        id(count($post) > 0) {
+        if(count($post) > 0) {
             $post = $post[0];
 
             // 2. Deletar os likes e comments
@@ -257,11 +257,21 @@ class PostHandler
             /* PostLike é pra identificar o banco */
             PostLike::delete()->where('id_post', $id)->execute();
             PostComment::delete()->where('id_post', $id)->execute();
+
+            // 3. Se a foto for type == photo, deletar o arquivo
+            if($post['type'] === 'photo') {
+                $img = __DIR__.'/../../public/media/uploads/'.$post['body'];
+                if(file_exists($img)) {
+                    unlink($img);
+                }
+            }
+
+            // 4. deletar o post 
+            Post::delete()->where('id', $id)->execute();
+
         }
+            
+
         
-
-        // 3. Se a foto for type == photo, deletar o arquivo
-
-        // 4. deletar o post 
     }
 }

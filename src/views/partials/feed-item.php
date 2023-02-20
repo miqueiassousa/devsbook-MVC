@@ -22,9 +22,15 @@
                 <br />
                 <span class="fidi-date"><?= date('d/m/y', strtotime($data->created_at)); ?></span>
             </div>
-            <div class="feed-item-head-btn">
-                <img src="<?= $base; ?>/assets/images/more.png" />
-            </div>
+
+            <?php if ($data->mine) : ?>
+                <div class="feed-item-head-btn">
+                    <img src="<?= $base; ?>/assets/images/more.png" />
+                    <div class="feed-item-more-window">
+                        <a href="<?=$base?>/post/<?=$data->id?>/delete">Excluir Post </a>
+                    </div>
+                </div>
+            <?php endif; ?>
         </div>
         <div class="feed-item-body mt-10 m-width-20">
 
@@ -35,11 +41,11 @@
                     echo nl2br($data->body);
                     break;
                 case 'photo':
-                    echo '<img src="'.$base.'/media/uploads/'.$data->body.'" />';
+                    echo '<img src="' . $base . '/media/uploads/' . $data->body . '" />';
                     break;
             } ?>
 
-            </div>
+        </div>
         <div class="feed-item-buttons row mt-20 m-width-20">
             <div class="like-btn <?= ($data->liked ? 'on' : ''); ?>"><?= $data->likeCount; ?></div>
             <div class="msg-btn"><?= count($data->comments); ?></div>

@@ -46,6 +46,7 @@ document.querySelector('.feed-new-input').addEventListener('blur', function(obj)
 });
 
 
+// Display do Botão Excluir
 
 function closeFeedWindow() {
     document.querySelectorAll('.feed-item-more-window').forEach(item=>{
@@ -65,6 +66,7 @@ document.querySelectorAll('.feed-item-head-btn').forEach(item=>{
         }, 500);
     });
 });
+
 
 
 // SCRIPT para acionar o botão do like e fazer a contagem

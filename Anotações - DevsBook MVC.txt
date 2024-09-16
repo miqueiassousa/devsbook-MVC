@@ -1,0 +1,15 @@
+Antes de iniciar o projeto precisar instalar o Composer
+
+Composer permite gerenciar, para cada projeto, a lista de módulos e bibliotecas necessários para seu funcionamento, bem como suas versões. Ele pode ser usado através do console de linha de comando e permite configurar um sistema de carregamento automático para bibliotecas compatíveis.
+------------------------------------------------------
+Erro Auto Load:
+
+Antes de rodar o projeto é necessario instalar
+as dependencias do composer dentro da pasta do projeto
+------------------------------------------------------
+
+Para trazer o modelo do projeto do b7web basta 
+fazer o clone do git no www e colonar o nome do que
+vai ser o projeto
+
+https://github.com/suporteb7web/mvc nome da pasta
